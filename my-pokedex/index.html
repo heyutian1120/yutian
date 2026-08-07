@@ -13,28 +13,207 @@
 
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             min-height: 100vh;
             padding-bottom: 40px;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 40%, #FFF9C4 70%, #FFECB3 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.8) 0%, transparent 50%),
+                radial-gradient(circle at 90% 30%, rgba(255,255,255,0.6) 0%, transparent 40%),
+                radial-gradient(circle at 50% 60%, rgba(255,255,255,0.5) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.7) 0%, transparent 45%);
+            z-index: 0;
+        }
+
+        .cloud {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            z-index: 0;
+            animation: floatCloud 20s infinite ease-in-out;
+        }
+
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .cloud-1 { width: 80px; height: 40px; top: 15%; left: 5%; animation-duration: 25s; }
+        .cloud-1::before { width: 40px; height: 40px; top: -20px; left: 10px; }
+        .cloud-1::after { width: 30px; height: 30px; top: -10px; left: 40px; }
+
+        .cloud-2 { width: 100px; height: 50px; top: 25%; right: 8%; animation-duration: 30s; animation-delay: -5s; }
+        .cloud-2::before { width: 50px; height: 50px; top: -25px; left: 15px; }
+        .cloud-2::after { width: 35px; height: 35px; top: -15px; left: 50px; }
+
+        .cloud-3 { width: 70px; height: 35px; top: 60%; left: 15%; animation-duration: 22s; animation-delay: -10s; }
+        .cloud-3::before { width: 35px; height: 35px; top: -18px; left: 8px; }
+        .cloud-3::after { width: 25px; height: 25px; top: -8px; left: 35px; }
+
+        .cloud-4 { width: 90px; height: 45px; top: 45%; right: 15%; animation-duration: 28s; animation-delay: -15s; }
+        .cloud-4::before { width: 45px; height: 45px; top: -22px; left: 12px; }
+        .cloud-4::after { width: 32px; height: 32px; top: -12px; left: 45px; }
+
+        .cloud-5 { width: 60px; height: 30px; top: 80%; left: 60%; animation-duration: 24s; animation-delay: -8s; }
+        .cloud-5::before { width: 30px; height: 30px; top: -15px; left: 6px; }
+        .cloud-5::after { width: 22px; height: 22px; top: -6px; left: 30px; }
+
+        @keyframes floatCloud {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(30px) translateY(-10px); }
+            50% { transform: translateX(-20px) translateY(5px); }
+            75% { transform: translateX(20px) translateY(10px); }
+        }
+
+        .rainbow {
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: conic-gradient(
+                from 180deg,
+                transparent 0deg,
+                rgba(255,0,0,0.1) 30deg,
+                rgba(255,165,0,0.1) 60deg,
+                rgba(255,255,0,0.1) 90deg,
+                rgba(0,128,0,0.1) 120deg,
+                rgba(0,0,255,0.1) 150deg,
+                rgba(75,0,130,0.1) 180deg,
+                rgba(148,0,211,0.1) 210deg,
+                transparent 240deg
+            );
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .plane-decoration {
+            position: fixed;
+            font-size: 24px;
+            z-index: 0;
+            animation: flyPlane 15s infinite linear;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .plane-1 { top: 30%; font-size: 32px; animation-duration: 20s; }
+        .plane-2 { top: 55%; font-size: 24px; animation-duration: 18s; animation-delay: -7s; }
+        .plane-3 { top: 75%; font-size: 28px; animation-duration: 22s; animation-delay: -12s; }
+
+        @keyframes flyPlane {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            100% { transform: translateX(calc(100vw + 100px)) rotate(0deg); }
         }
 
         .header {
-            background: linear-gradient(90deg, #2196F3 0%, #03A9F4 50%, #00BCD4 100%);
+            background: linear-gradient(90deg, #FF6B6B 0%, #FF8E53 30%, #FFD93D 60%, #6BCB77 100%);
             color: white;
             text-align: center;
             padding: 30px 20px;
-            box-shadow: 0 4px 20px rgba(33, 150, 243, 0.3);
+            box-shadow: 
+                0 4px 20px rgba(255, 107, 107, 0.4),
+                inset 0 -4px 20px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .header::before {
+            content: '✈️';
+            position: absolute;
+            left: 20px;
+            top: 45%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            animation: bouncePlane 2s infinite;
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3));
+        }
+
+        .header::after {
+            content: '🚀';
+            position: absolute;
+            right: 20px;
+            top: 45%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            animation: bouncePlane 2s infinite 0.5s;
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3));
+        }
+
+        @keyframes bouncePlane {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.1); }
+        }
+
+        @media (max-width: 767px) {
+            .header {
+                padding: 24px 16px;
+            }
+
+            /* 手机端隐藏左右装饰飞机，避免与标题文字重叠 */
+            .header::before,
+            .header::after {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 26px;
+                letter-spacing: 2px;
+                margin-bottom: 14px;
+                -webkit-text-stroke: 1.5px #C2185B;
+                text-shadow:
+                    0 3px 0 #C2185B,
+                    0 5px 10px rgba(0,0,0,0.35);
+            }
+
+            .header h1::after {
+                bottom: -8px;
+                width: 90px;
+                height: 5px;
+            }
         }
 
         .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            margin-bottom: 16px;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #FFF;
+            margin-bottom: 18px;
+            -webkit-text-stroke: 2px #C2185B;
+            text-shadow:
+                0 4px 0 #C2185B,
+                0 6px 12px rgba(0,0,0,0.35);
+            position: relative;
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Comic Sans MS', 'Baloo', cursive, sans-serif;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, #FFF 20%, #FFEB3B 50%, #FFF 80%, transparent);
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .search-box {
@@ -46,78 +225,364 @@
         .search-box input {
             width: 100%;
             padding: 14px 20px 14px 50px;
-            border: none;
-            border-radius: 30px;
+            border: 3px solid #fff;
+            border-radius: 50px;
             font-size: 16px;
             outline: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.2),
+                inset 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            background: rgba(0,0,0,0.25);
+            color: #fff;
         }
 
         .search-box input:focus {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 
+                0 6px 25px rgba(0,0,0,0.3),
+                inset 0 2px 8px rgba(0,0,0,0.15);
+            transform: scale(1.02);
+            background: rgba(0,0,0,0.35);
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.75);
         }
 
         .search-box::before {
-            content: "🔍";
+            content: '✈️';
             position: absolute;
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 18px;
+            animation: searchPlane 1.5s infinite;
+        }
+
+        @keyframes searchPlane {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            25% { transform: translateY(-50%) rotate(-10deg); }
+            75% { transform: translateY(-50%) rotate(10deg); }
+        }
+
+        .summon-button {
+            display: block;
+            margin: 16px auto 0;
+            padding: 14px 32px;
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%);
+            border: 4px solid #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 
+                0 6px 20px rgba(255, 107, 107, 0.4),
+                0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: inherit;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summon-button:hover {
+            transform: scale(1.08);
+            box-shadow: 
+                0 10px 30px rgba(255, 107, 107, 0.5),
+                0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .summon-button:active {
+            transform: scale(0.95);
+        }
+
+        .summon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .summon-overlay.active {
+            display: flex;
+        }
+
+        .summon-modal {
+            background: white;
+            border-radius: 32px;
+            padding: 30px;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            position: relative;
+            animation: modalBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalBounce {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .summon-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .summon-close:hover {
+            background: #FFCDD2;
+            color: #FF5252;
+            transform: rotate(90deg);
+        }
+
+        .summon-shine {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,215,0,0.2) 50%, transparent 70%);
+            border-radius: 40px;
+            animation: shineMove 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shineMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .summon-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            animation: iconFloat 2s infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .summon-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #FF6B6B;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .summon-image-wrapper {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFEBEE 0%, #E3F2FD 100%);
+            border: 6px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .summon-image-wrapper .summon-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: imageAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes imageAppear {
+            0% { transform: scale(0) rotate(-180deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .summon-name {
+            font-size: 28px;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .summon-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .summon-phonics {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9800 100%);
+            border-radius: 50%;
+            color: white;
+            border: 4px solid #fff;
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+            margin-bottom: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .summon-phonics:hover {
+            transform: scale(1.15);
+        }
+
+        .summon-phonics.playing {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            animation: bouncePill 0.4s infinite;
+        }
+
+        .summon-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .summon-btn {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            letter-spacing: 1px;
+        }
+
+        .summon-btn-listen {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+
+        .summon-btn-listen:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(33, 150, 243, 0.5);
+        }
+
+        .summon-btn-retry {
+            background: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        .summon-btn-retry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 107, 107, 0.5);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 24px 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .result-count {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 16px;
+            display: none;
         }
 
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
+            align-items: start;
         }
 
         @media (min-width: 768px) {
             .card-grid {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 20px;
+                gap: 24px;
             }
         }
 
         .card {
             background: white;
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             position: relative;
+            border: 4px solid transparent;
         }
 
         .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02) rotate(-1deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
+
+        .card-tag-kuaidi { border-color: #FF5252; }
+        .card-tag-jiuyuan { border-color: #FF80AB; }
+        .card-tag-gongcheng { border-color: #FF9800; }
+        .card-tag-ziran { border-color: #4CAF50; }
+        .card-tag-taikong { border-color: #9C27B0; }
+        .card-tag-jingjie { border-color: #2196F3; }
+        .card-tag-jiaotong { border-color: #5DADE2; }
+        .card-tag-zhihui { border-color: #3F51B5; }
+        .card-tag-qianbei { border-color: #E67E22; }
+        .card-tag-dienneng { border-color: #FFD700; }
+        .card-tag-konglong { border-color: #2E7D32; }
 
         .card-image-wrapper {
             position: relative;
             width: 100%;
-            height: 120px;
-            background-color: #f5f5f5;
+            height: 130px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+            overflow: hidden;
         }
+
+        .card-tag-kuaidi .card-image-wrapper { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); }
+        .card-tag-jiuyuan .card-image-wrapper { background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD9 100%); }
+        .card-tag-gongcheng .card-image-wrapper { background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); }
+        .card-tag-ziran .card-image-wrapper { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
+        .card-tag-taikong .card-image-wrapper { background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); }
+        .card-tag-jingjie .card-image-wrapper { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); }
+        .card-tag-jiaotong .card-image-wrapper { background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%); }
+        .card-tag-zhihui .card-image-wrapper { background: linear-gradient(135deg, #EDE7F6 0%, #D1C4E9 100%); }
+        .card-tag-qianbei .card-image-wrapper { background: linear-gradient(135deg, #FEF3E2 0%, #FDE0B7 100%); }
+        .card-tag-dienneng .card-image-wrapper { background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%); }
+        .card-tag-konglong .card-image-wrapper { background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%); }
 
         @media (min-width: 768px) {
             .card-image-wrapper {
-                height: 150px;
+                height: 160px;
             }
         }
 
@@ -126,191 +591,292 @@
             height: 100%;
             object-fit: contain;
             display: block;
+            transition: transform 0.4s;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-image-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
         }
 
         .phonics-pill {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 10px;
+            right: 10px;
             z-index: 10;
-            height: 36px;
-            padding: 0 12px;
-            font-size: 16px;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            height: 40px;
+            padding: 0 14px;
+            font-size: 18px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9800 100%);
+            border-radius: 25px;
+            box-shadow: 
+                0 4px 12px rgba(255, 152, 0, 0.4),
+                0 2px 4px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            gap: 4px;
-            color: #2196F3;
+            justify-content: center;
+            color: white;
             cursor: pointer;
-            transition: all 0.3s;
-            border: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 3px solid #fff;
             font-family: inherit;
             line-height: 1;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         .phonics-pill:hover {
-            transform: scale(1.1);
-            background: #fff;
+            transform: scale(1.15);
+            box-shadow: 
+                0 6px 20px rgba(255, 152, 0, 0.5),
+                0 2px 4px rgba(0,0,0,0.2);
         }
 
         .phonics-pill.playing {
-            background: #4CAF50;
-            color: #fff;
-            animation: pulse 0.6s infinite;
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            animation: bouncePill 0.4s infinite;
+            border-color: #81C784;
         }
 
-        @keyframes pulse {
+        @keyframes bouncePill {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
         }
 
         @media (min-width: 768px) {
             .phonics-pill {
-                height: 42px;
-                padding: 0 16px;
-                font-size: 18px;
+                height: 46px;
+                padding: 0 18px;
+                font-size: 20px;
             }
         }
 
         .card-body {
-            padding: 12px;
+            padding: 14px;
+            background: white;
         }
 
         .card-name {
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 900;
             color: #333;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .card-tag {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
             color: white;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-tag {
+            transform: scale(1.05);
         }
 
         .card-detail {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            background: #f8f9fa;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-top: 0 dashed transparent;
         }
 
         .card-detail.active {
-            max-height: 200px;
-            padding: 12px;
-            border-top: 1px dashed #ddd;
+            max-height: 250px;
+            padding: 14px;
+            border-top: 3px dashed #e0e0e0;
         }
+
+        .card-tag-kuaidi .card-detail.active { border-color: #FFCDD2; background: linear-gradient(135deg, #FFF5F5 0%, #fff 100%); }
+        .card-tag-jiuyuan .card-detail.active { border-color: #F8BBD9; background: linear-gradient(135deg, #FCEFFC 0%, #fff 100%); }
+        .card-tag-gongcheng .card-detail.active { border-color: #FFE0B2; background: linear-gradient(135deg, #FFF8E1 0%, #fff 100%); }
+        .card-tag-ziran .card-detail.active { border-color: #C8E6C9; background: linear-gradient(135deg, #F1F8E9 0%, #fff 100%); }
+        .card-tag-taikong .card-detail.active { border-color: #E1BEE7; background: linear-gradient(135deg, #F3E5F5 0%, #fff 100%); }
+        .card-tag-jingjie .card-detail.active { border-color: #BBDEFB; background: linear-gradient(135deg, #E3F2FD 0%, #fff 100%); }
+        .card-tag-jiaotong .card-detail.active { border-color: #B3E5FC; background: linear-gradient(135deg, #E1F5FE 0%, #fff 100%); }
+        .card-tag-zhihui .card-detail.active { border-color: #D1C4E9; background: linear-gradient(135deg, #EDE7F6 0%, #fff 100%); }
+        .card-tag-qianbei .card-detail.active { border-color: #FDE0B7; background: linear-gradient(135deg, #FEF3E2 0%, #fff 100%); }
+        .card-tag-dienneng .card-detail.active { border-color: #FFF9C4; background: linear-gradient(135deg, #FFFDE7 0%, #fff 100%); }
+        .card-tag-konglong .card-detail.active { border-color: #A5D6A7; background: linear-gradient(135deg, #F1F8E9 0%, #fff 100%); }
 
         .card-detail p {
             font-size: 13px;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .card-detail .detail-label {
-            font-weight: 700;
-            color: #2196F3;
-            margin-bottom: 4px;
+            font-weight: 900;
+            color: #FF6B6B;
+            margin-bottom: 6px;
             font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-detail .detail-label::before {
+            content: '⭐';
         }
 
         .no-result {
             text-align: center;
-            padding: 60px 20px;
-            color: #999;
-            font-size: 16px;
+            padding: 80px 20px;
+            color: #666;
+            font-size: 18px;
             grid-column: 1 / -1;
+            background: rgba(255,255,255,0.8);
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .no-result-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
+            font-size: 64px;
+            margin-bottom: 16px;
+            animation: searchPlane 2s infinite;
         }
 
-        .tag-kuaidi { background: #FF5252; }
-        .tag-jiuyuan { background: #FF80AB; }
-        .tag-gongcheng { background: #FF9800; }
-        .tag-ziran { background: #4CAF50; }
-        .tag-taikong { background: #9C27B0; }
-        .tag-jingjie { background: #2196F3; }
-        .tag-jiaotong { background: #5DADE2; }
-        .tag-zhihui { background: #3F51B5; }
-        .tag-qianbei { background: #E67E22; }
-        .tag-dienneng { background: #FFD700; color: #333; }
-        .tag-konglong { background: #2E7D32; }
+        .no-result p {
+            font-weight: 600;
+        }
+
+        .tag-kuaidi { background: linear-gradient(135deg, #FF5252 0%, #FF1744 100%); }
+        .tag-jiuyuan { background: linear-gradient(135deg, #FF80AB 0%, #F50057 100%); }
+        .tag-gongcheng { background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); }
+        .tag-ziran { background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); }
+        .tag-taikong { background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); }
+        .tag-jingjie { background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%); }
+        .tag-jiaotong { background: linear-gradient(135deg, #5DADE2 0%, #1E88E5 100%); }
+        .tag-zhihui { background: linear-gradient(135deg, #3F51B5 0%, #283593 100%); }
+        .tag-qianbei { background: linear-gradient(135deg, #E67E22 0%, #D84315 100%); }
+        .tag-dienneng { background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%); color: #333; }
+        .tag-konglong { background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); }
+
+        .tag-kuaidi::before { content: '📦'; }
+        .tag-jiuyuan::before { content: '🚑'; }
+        .tag-gongcheng::before { content: '🔧'; }
+        .tag-ziran::before { content: '🌿'; }
+        .tag-taikong::before { content: '🚀'; }
+        .tag-jingjie::before { content: '🚓'; }
+        .tag-jiaotong::before { content: '🚚'; }
+        .tag-zhihui::before { content: '🎯'; }
+        .tag-qianbei::before { content: '🏆'; }
+        .tag-dienneng::before { content: '⚡'; }
+        .tag-konglong::before { content: '🦕'; }
     </style>
 </head>
 <body>
+    <div class="rainbow"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+    <div class="cloud cloud-5"></div>
+    <div class="plane-decoration plane-1">✈️</div>
+    <div class="plane-decoration plane-2">🚁</div>
+    <div class="plane-decoration plane-3">🛩️</div>
+
     <div class="header">
         <h1>超级飞侠自然拼读图鉴</h1>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="搜索超级飞侠名称..." autocomplete="off">
         </div>
+        <button class="summon-button" onclick="summonCharacter()">🎲 随机召唤超级飞侠</button>
+    </div>
+
+    <div class="summon-overlay" id="summonOverlay">
+        <div class="summon-modal">
+            <div class="summon-shine"></div>
+            <button class="summon-close" onclick="closeSummon()">✕</button>
+            <div class="summon-icon">✨</div>
+            <div class="summon-title">🎉 召唤成功！</div>
+            <div class="summon-image-wrapper">
+                <img class="summon-image" id="summonImage" src="" alt="" />
+            </div>
+            <div class="summon-name" id="summonName"></div>
+            <span class="summon-tag" id="summonTag"></span>
+            <div class="summon-phonics" id="summonPhonics" onclick="playSummonAudio()">?</div>
+            <div class="summon-actions">
+                <button class="summon-btn summon-btn-listen" onclick="playSummonAudio()">🔊 再听一次</button>
+                <button class="summon-btn summon-btn-retry" onclick="summonCharacter()">🎲 再召唤一个</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
-        <div class="result-count" id="resultCount">共 47 位超级飞侠，其中 26 位带自然拼读发音</div>
+        <div class="result-count" id="resultCount">共 46 位超级飞侠，其中 41 位带自然拼读发音</div>
         <div class="card-grid" id="cardGrid"></div>
     </div>
 
     <script>
         const characters = [
-            { id: 1, name: "乐迪", category: "快递先锋", tagClass: "tag-kuaidi", phonics: "/s/", description: "世界上最快的飞机，每时每刻准时送达，充满活力与自信，是超级飞侠的绝对主角。" },
-            { id: 2, name: "小爱", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "/æ/", description: "粉红救援直升机，带有救援绳和应急装备，只要乐迪需要帮助就立刻出动，温柔又勇敢。" },
-            { id: 3, name: "多多", category: "工程大师", tagClass: "tag-gongcheng", phonics: "/t/", description: "超级飞侠中的优秀工程师，拥有强大的工具箱，总能在关键时刻帮助伙伴修理和建造。" },
-            { id: 4, name: "包警长", category: "正义卫士", tagClass: "tag-jingjie", phonics: "/ɪ/", description: "正气凛然充满正义感，拥有交通指挥和侦察能力，大小问题都在他的掌控之中。" },
-            { id: 5, name: "酷飞", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "/p/", description: "特技表演飞机，常在空中进行酷炫表演，希望成为观众的焦点，活泼又自信。" },
-            { id: 6, name: "小青", category: "自然使者", tagClass: "tag-ziran", phonics: "/n/", description: "擅长游泳的潜水天才，头部的风扇使她在海里可以愉快畅游，热爱海洋生物。" },
-            { id: 7, name: "胡须爷爷", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "/k/", description: "老爷飞机，博学多才喜欢讲故事，像夺宝奇兵一样有很多奇妙的冒险经历。" },
-            { id: 8, name: "卡文", category: "自然使者", tagClass: "tag-ziran", phonics: "/e/", description: "拥有斑马纹外观，精通各种动物语言，有动物困难都可以找他解决，热爱大自然。" },
-            { id: 9, name: "淘淘", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "/h/", description: "酷爱运动的运动健将，精通各式运动，把困难都看作是一项可以挑战的运动。" },
-            { id: 10, name: "米莉", category: "星际旅者", tagClass: "tag-taikong", phonics: "/r/", description: "高科技宇航飞机，来自外太空的明星，运用科学知识为小伙伴排忧解难。" },
-            { id: 11, name: "金刚", category: "工程大师", tagClass: "tag-gongcheng", phonics: "/m/", description: "钻地小能手，鼻子有巨大用处，可以挖掘深埋地底的宝藏，是工程队核心。" },
-            { id: 12, name: "酷雷", category: "星际旅者", tagClass: "tag-taikong", phonics: "/d/", description: "银河特派队成员，能发出威力无限的激光，拥有各种全息装备，酷飞的兄弟。" },
-            { id: 13, name: "圆圆", category: "星际旅者", tagClass: "tag-taikong", phonics: "/g/", description: "太阳造型飞机，光芒四射充满活力，总是给朋友们带来温暖和快乐，能时光倒流。" },
-            { id: 14, name: "卡尔", category: "运输专家", tagClass: "tag-jiaotong", phonics: "/ɒ/", description: "能变身的运输卡车，可为其他交通工具充电，运送各种装备，勤劳可靠。" },
-            { id: 15, name: "米克", category: "星际旅者", tagClass: "tag-taikong", phonics: "/ʌ/", description: "米莉的弟弟，太空探险家，喜欢探索未知星球和宇宙奥秘，充满好奇心。" },
-            { id: 16, name: "大力", category: "工程大师", tagClass: "tag-gongcheng", phonics: "/l/", description: "最强壮的起重机飞机，喜欢举起重物，也有温柔暖心的一面，工程队力量担当。" },
-            { id: 17, name: "小柔", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "/f/", description: "白色救护车，拥有超级听诊器，温柔体贴稳重沉着，是爱心救援队队员。" },
-            { id: 18, name: "大勇", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "/b/", description: "红色消防车，勇敢无畏乐于助人，用直升梯迅速转移人员，救援先锋。" },
-            { id: 19, name: "朗朗", category: "工程大师", tagClass: "tag-gongcheng", phonics: "/eɪ/", description: "黄色挖掘机，头戴橙色安全帽，妙想工程队成员，擅长修理和发明创造。" },
-            { id: 20, name: "多利", category: "工程大师", tagClass: "tag-gongcheng", phonics: "/dʒ/", description: "橙色装载机，工程队成员，勤劳能干，总能把建筑材料准时送达目的地。" },
-            { id: 21, name: "庞机长", category: "运输专家", tagClass: "tag-jiaotong", phonics: "/əʊ/", description: "经验丰富的客机队长，负责运送大量乘客安全到达目的地，沉稳可靠。" },
-            { id: 22, name: "小亮", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "/aɪ/", description: "清洁直升机，热衷并善于打扫，清理陨石和脏污最拿手，让环境焕然一新。" },
-            { id: 23, name: "大程", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "/iː/", description: "小爱的哥哥，救援飞侠，拥有强大的救援设备和冷静的头脑，值得信赖。" },
-            { id: 24, name: "巴奇", category: "自然使者", tagClass: "tag-ziran", phonics: "/ɔː/", description: "昆虫小专家，可以随意变大变小，能和微型小动物沟通，探索微观世界。" },
-            { id: 25, name: "雪儿", category: "自然使者", tagClass: "tag-ziran", phonics: "/z/", description: "紫色滑雪飞机，雪地里的超级飞侠，没有人比她更了解冰雪，热爱滑雪。" },
-            { id: 26, name: "巧巧", category: "自然使者", tagClass: "tag-ziran", phonics: "/w/", description: "胡须爷爷的孙女，热爱攀岩勇于冒险，天生的冒险家战斗力超强，活泼可爱。" },
-            { id: 27, name: "安琪", category: "指挥中心", tagClass: "tag-zhihui", phonics: "/ŋ/", description: "机场控制塔指挥官，负责调度所有超级飞侠的任务安排，睿智冷静。" },
-            { id: 28, name: "金宝", category: "指挥中心", tagClass: "tag-zhihui", phonics: "/v/", description: "控制塔操控员，友善理智温和，喜欢机场上所有人像家人一样，温暖亲切。" },
-            { id: 29, name: "皮皮", category: "运输专家", tagClass: "tag-jiaotong", phonics: "/ʊ/", description: "小型运输机器人，机场地勤小能手，负责运送行李和货物，勤快可靠。" },
-            { id: 30, name: "咚咚", category: "运输专家", tagClass: "tag-jiaotong", phonics: "/uː/", description: "高速火车，可以在任何地方使用全息轨道高速移动，速度极快。" },
-            { id: 31, name: "露探长", category: "正义卫士", tagClass: "tag-jingjie", phonics: "/j/", description: "警用飞机，聪明的完美主义者，具有超强细节洞察力，侦破案件高手。" },
-            { id: 32, name: "金小子", category: "电能战队", tagClass: "tag-dienneng", phonics: "/ks/", description: "拥有黄金机械臂的反派飞机，喜欢制造麻烦但内心也有善良的一面，人气极高。" },
-            { id: 33, name: "佩佩", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "/tʃ/", description: "音乐飞机，热爱说唱和表演，用音乐给朋友们带来欢乐，节奏感超强。" },
-            { id: 34, name: "雷克", category: "电能战队", tagClass: "tag-dienneng", phonics: "/ʃ/", description: "飞行跑车，电能飞侠先驱，拥有超快的速度和强大的电能装备，酷炫十足。" },
-            { id: 35, name: "金小薇", category: "电能战队", tagClass: "tag-dienneng", phonics: "/θ/", description: "金小子的表妹，公主造型飞机，外表优雅但战斗力不容小觑，高贵美丽。" },
-            { id: 36, name: "酷威", category: "电能战队", tagClass: "tag-dienneng", phonics: "/kw/", description: "电能战队成员，拥有酷炫的电能装备，是团队中的力量担当，勇猛果敢。" },
-            { id: 37, name: "塔塔", category: "电能战队", tagClass: "tag-dienneng", phonics: "/aʊ/", description: "电能战队成员，性格沉稳，擅长分析和制定战术，是团队的智囊。" },
-            { id: 38, name: "琪琪", category: "电能战队", tagClass: "tag-dienneng", phonics: "/ɔɪ/", description: "电能战队成员，活泼可爱，拥有独特的电能技能，机灵俏皮。" },
-            { id: 39, name: "金小卡", category: "电能战队", tagClass: "tag-dienneng", phonics: "/juː/", description: "怪物卡车，金小子的搭档，拥有强大的冲撞力和坚固的装甲，霸气十足。" },
-            { id: 40, name: "大壮", category: "恐龙救援", tagClass: "tag-konglong", phonics: "/ɜː/", description: "霸王龙飞机，恐龙救援队队长，能瞬间变大，力量无穷，保护队友。" },
-            { id: 41, name: "小翼", category: "恐龙救援", tagClass: "tag-konglong", phonics: "/ɑː/", description: "翼龙飞机，恐龙救援队侦查员，能制造龙卷风，速度极快，敏捷灵活。" },
+            { id: 1, name: "乐迪", category: "快递先锋", tagClass: "tag-kuaidi", phonics: "s", description: "世界上最快的飞机，每时每刻准时送达，充满活力与自信，是超级飞侠的绝对主角。" },
+            { id: 2, name: "小爱", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "a", description: "粉红救援直升机，带有救援绳和应急装备，只要乐迪需要帮助就立刻出动，温柔又勇敢。" },
+            { id: 3, name: "多多", category: "工程大师", tagClass: "tag-gongcheng", phonics: "t", description: "超级飞侠中的优秀工程师，拥有强大的工具箱，总能在关键时刻帮助伙伴修理和建造。" },
+            { id: 4, name: "包警长", category: "正义卫士", tagClass: "tag-jingjie", phonics: "i", description: "正气凛然充满正义感，拥有交通指挥和侦察能力，大小问题都在他的掌控之中。" },
+            { id: 5, name: "酷飞", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "p", description: "特技表演飞机，常在空中进行酷炫表演，希望成为观众的焦点，活泼又自信。" },
+            { id: 6, name: "小青", category: "自然使者", tagClass: "tag-ziran", phonics: "n", description: "擅长游泳的潜水天才，头部的风扇使她在海里可以愉快畅游，热爱海洋生物。" },
+            { id: 7, name: "胡须爷爷", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "ck", description: "老爷飞机，博学多才喜欢讲故事，像夺宝奇兵一样有很多奇妙的冒险经历。" },
+            { id: 8, name: "卡文", category: "自然使者", tagClass: "tag-ziran", phonics: "e", description: "拥有斑马纹外观，精通各种动物语言，有动物困难都可以找他解决，热爱大自然。" },
+            { id: 9, name: "淘淘", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "h", description: "酷爱运动的运动健将，精通各式运动，把困难都看作是一项可以挑战的运动。" },
+            { id: 10, name: "米莉", category: "星际旅者", tagClass: "tag-taikong", phonics: "r", description: "高科技宇航飞机，来自外太空的明星，运用科学知识为小伙伴排忧解难。" },
+            { id: 11, name: "金刚", category: "工程大师", tagClass: "tag-gongcheng", phonics: "m", description: "钻地小能手，鼻子有巨大用处，可以挖掘深埋地底的宝藏，是工程队核心。" },
+            { id: 12, name: "酷雷", category: "星际旅者", tagClass: "tag-taikong", phonics: "d", description: "银河特派队成员，能发出威力无限的激光，拥有各种全息装备，酷飞的兄弟。" },
+            { id: 13, name: "圆圆", category: "星际旅者", tagClass: "tag-taikong", phonics: "g", description: "太阳造型飞机，光芒四射充满活力，总是给朋友们带来温暖和快乐，能时光倒流。" },
+            { id: 14, name: "卡尔", category: "运输专家", tagClass: "tag-jiaotong", phonics: "o", description: "能变身的运输卡车，可为其他交通工具充电，运送各种装备，勤劳可靠。" },
+            { id: 15, name: "米克", category: "星际旅者", tagClass: "tag-taikong", phonics: "u", description: "米莉的弟弟，太空探险家，喜欢探索未知星球和宇宙奥秘，充满好奇心。" },
+            { id: 16, name: "大力", category: "工程大师", tagClass: "tag-gongcheng", phonics: "l", description: "最强壮的起重机飞机，喜欢举起重物，也有温柔暖心的一面，工程队力量担当。" },
+            { id: 17, name: "小柔", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "f", description: "白色救护车，拥有超级听诊器，温柔体贴稳重沉着，是爱心救援队队员。" },
+            { id: 18, name: "大勇", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "b", description: "红色消防车，勇敢无畏乐于助人，用直升梯迅速转移人员，救援先锋。" },
+            { id: 19, name: "朗朗", category: "工程大师", tagClass: "tag-gongcheng", phonics: "ai", description: "黄色挖掘机，头戴橙色安全帽，妙想工程队成员，擅长修理和发明创造。" },
+            { id: 20, name: "多利", category: "工程大师", tagClass: "tag-gongcheng", phonics: "j", description: "橙色装载机，工程队成员，勤劳能干，总能把建筑材料准时送达目的地。" },
+            { id: 21, name: "庞机长", category: "运输专家", tagClass: "tag-jiaotong", phonics: "oa", description: "经验丰富的客机队长，负责运送大量乘客安全到达目的地，沉稳可靠。" },
+            { id: 22, name: "小亮", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "ie", description: "清洁直升机，热衷并善于打扫，清理陨石和脏污最拿手，让环境焕然一新。" },
+            { id: 23, name: "大程", category: "救援天使", tagClass: "tag-jiuyuan", phonics: "ee", description: "小爱的哥哥，救援飞侠，拥有强大的救援设备和冷静的头脑，值得信赖。" },
+            { id: 24, name: "巴奇", category: "自然使者", tagClass: "tag-ziran", phonics: "or", description: "昆虫小专家，可以随意变大变小，能和微型小动物沟通，探索微观世界。" },
+            { id: 25, name: "雪儿", category: "自然使者", tagClass: "tag-ziran", phonics: "z", description: "紫色滑雪飞机，雪地里的超级飞侠，没有人比她更了解冰雪，热爱滑雪。" },
+            { id: 26, name: "巧巧", category: "自然使者", tagClass: "tag-ziran", phonics: "w", description: "胡须爷爷的孙女，热爱攀岩勇于冒险，天生的冒险家战斗力超强，活泼可爱。" },
+            { id: 27, name: "安琪", category: "指挥中心", tagClass: "tag-zhihui", phonics: "ng", description: "机场控制塔指挥官，负责调度所有超级飞侠的任务安排，睿智冷静。" },
+            { id: 28, name: "金宝", category: "指挥中心", tagClass: "tag-zhihui", phonics: "v", description: "控制塔操控员，友善理智温和，喜欢机场上所有人像家人一样，温暖亲切。" },
+            { id: 29, name: "皮皮", category: "运输专家", tagClass: "tag-jiaotong", phonics: "oo", description: "小型运输机器人，机场地勤小能手，负责运送行李和货物，勤快可靠。" },
+            { id: 30, name: "咚咚", category: "运输专家", tagClass: "tag-jiaotong", phonics: "oo", description: "高速火车，可以在任何地方使用全息轨道高速移动，速度极快。" },
+            { id: 31, name: "露探长", category: "正义卫士", tagClass: "tag-jingjie", phonics: "y", description: "警用飞机，聪明的完美主义者，具有超强细节洞察力，侦破案件高手。" },
+            { id: 32, name: "金小子", category: "电能战队", tagClass: "tag-dienneng", phonics: "x", description: "拥有黄金机械臂的反派飞机，喜欢制造麻烦但内心也有善良的一面，人气极高。" },
+            { id: 33, name: "佩佩", category: "传奇前辈", tagClass: "tag-qianbei", phonics: "ch", description: "音乐飞机，热爱说唱和表演，用音乐给朋友们带来欢乐，节奏感超强。" },
+            { id: 34, name: "雷克", category: "电能战队", tagClass: "tag-dienneng", phonics: "sh", description: "飞行跑车，电能飞侠先驱，拥有超快的速度和强大的电能装备，酷炫十足。" },
+            { id: 35, name: "金小薇", category: "电能战队", tagClass: "tag-dienneng", phonics: "th", description: "金小子的表妹，公主造型飞机，外表优雅但战斗力不容小觑，高贵美丽。" },
+            { id: 36, name: "酷威", category: "电能战队", tagClass: "tag-dienneng", phonics: "qu", description: "电能战队成员，拥有酷炫的电能装备，是团队中的力量担当，勇猛果敢。" },
+            { id: 37, name: "塔塔", category: "电能战队", tagClass: "tag-dienneng", phonics: "ou", description: "电能战队成员，性格沉稳，擅长分析和制定战术，是团队的智囊。" },
+            { id: 38, name: "琪琪", category: "电能战队", tagClass: "tag-dienneng", phonics: "oi", description: "电能战队成员，活泼可爱，拥有独特的电能技能，机灵俏皮。" },
+            { id: 39, name: "金小卡", category: "电能战队", tagClass: "tag-dienneng", phonics: "ue", description: "怪物卡车，金小子的搭档，拥有强大的冲撞力和坚固的装甲，霸气十足。" },
+            { id: 40, name: "大壮", category: "恐龙救援", tagClass: "tag-konglong", phonics: "er", description: "霸王龙飞机，恐龙救援队队长，能瞬间变大，力量无穷，保护队友。" },
+            { id: 41, name: "小翼", category: "恐龙救援", tagClass: "tag-konglong", phonics: "ar", description: "翼龙飞机，恐龙救援队侦查员，能制造龙卷风，速度极快，敏捷灵活。" },
             { id: 42, name: "剑剑", category: "恐龙救援", tagClass: "tag-konglong", description: "剑龙飞机，恐龙救援队治疗师，背部旋转切割障碍，勇敢坚毅。" },
             { id: 43, name: "小盾", category: "恐龙救援", tagClass: "tag-konglong", description: "三角龙飞机，恐龙救援队力量型，角能快速变大，防御超强。" },
-            { id: 44, name: "腕腕", category: "恐龙救援", tagClass: "tag-konglong", description: "腕龙飞机，恐龙救援队救援员，脖子可伸缩救援，温柔细心。" },
+            { id: 44, name: "小婉", category: "恐龙救援", tagClass: "tag-konglong", description: "腕龙飞机，恐龙救援队救援员，脖子可伸缩救援，温柔细心。" },
             { id: 45, name: "莎莎", category: "星际旅者", tagClass: "tag-taikong", description: "第18季登场的新角色，来自星际旅者团队，充满活力，探索新星系。" },
-            { id: 46, name: "酷芮", category: "星际旅者", tagClass: "tag-taikong", description: "星际旅者成员，拥有独特的星际探索能力，勇敢无畏，敢于挑战。" },
-            { id: 47, name: "颖颖", category: "星际旅者", tagClass: "tag-taikong", description: "史前大救援成员，星际旅者团队，擅长探索未知领域，聪明伶俐。" }
+            { id: 46, name: "酷芮", category: "星际旅者", tagClass: "tag-taikong", description: "星际旅者成员，拥有独特的星际探索能力，勇敢无畏，敢于挑战。" }
         ];
 
         const cardGrid = document.getElementById('cardGrid');
@@ -387,14 +953,14 @@
                         <p>没有找到匹配的超级飞侠</p>
                     </div>
                 `;
-                resultCount.textContent = '共 0 位超级飞侠，其中 26 位带自然拼读发音';
+                resultCount.textContent = '共 0 位超级飞侠，其中 0 位带自然拼读发音';
                 return;
             }
 
             cardGrid.innerHTML = data.map(item => {
-                const phonicsBtn = item.phonics ? `<button class="phonics-pill" data-id="${item.id}" onclick="playAudio(event, ${item.id})" title="播放自然拼读">${item.phonics} 🔊</button>` : '';
+                const phonicsBtn = item.phonics ? `<button class="phonics-pill" data-id="${item.id}" title="播放自然拼读">${item.phonics}</button>` : '';
                 return `
-                <div class="card" data-id="${item.id}" onclick="toggleDetail(${item.id})">
+                <div class="card card-${item.tagClass}" data-id="${item.id}">
                     <div class="card-image-wrapper">
                         <img class="card-image" src="./images/${item.id}.webp" alt="${item.name}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/300x200?text='+encodeURIComponent(this.alt)">
                         ${phonicsBtn}
@@ -411,13 +977,31 @@
             `;
             }).join('');
 
-            resultCount.textContent = `共 ${data.length} 位超级飞侠，其中 26 位带自然拼读发音`;
+            const phonicsCount = data.filter(item => item.phonics).length;
+            resultCount.textContent = `共 ${data.length} 位超级飞侠，其中 ${phonicsCount} 位带自然拼读发音`;
         }
+
+        cardGrid.addEventListener('click', function(event) {
+            const phonicsBtn = event.target.closest('.phonics-pill');
+            if (phonicsBtn) {
+                event.stopPropagation();
+                const id = parseInt(phonicsBtn.getAttribute('data-id'), 10);
+                playAudio(event, id);
+                return;
+            }
+
+            const card = event.target.closest('.card');
+            if (card) {
+                const id = parseInt(card.getAttribute('data-id'), 10);
+                toggleDetail(id);
+            }
+        });
 
         window.toggleDetail = function(id) {
             const detail = document.getElementById(`detail-${id}`);
+            if (!detail) return;
             const isActive = detail.classList.contains('active');
-            
+
             document.querySelectorAll('.card-detail.active').forEach(el => {
                 el.classList.remove('active');
             });
@@ -433,6 +1017,118 @@
                 item.name.toLowerCase().includes(keyword)
             );
             renderCards(filtered);
+        });
+
+        const summonOverlay = document.getElementById('summonOverlay');
+        const summonImage = document.getElementById('summonImage');
+        const summonName = document.getElementById('summonName');
+        const summonTag = document.getElementById('summonTag');
+        const summonPhonics = document.getElementById('summonPhonics');
+        let currentSummonId = null;
+
+        const tagColors = {
+            'tag-kuaidi': 'linear-gradient(135deg, #FF5252 0%, #FF1744 100%)',
+            'tag-jiuyuan': 'linear-gradient(135deg, #FF80AB 0%, #F50057 100%)',
+            'tag-gongcheng': 'linear-gradient(135deg, #FF9800 0%, #F57C00 100%)',
+            'tag-ziran': 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)',
+            'tag-taikong': 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)',
+            'tag-jingjie': 'linear-gradient(135deg, #2196F3 0%, #1565C0 100%)',
+            'tag-jiaotong': 'linear-gradient(135deg, #5DADE2 0%, #1E88E5 100%)',
+            'tag-zhihui': 'linear-gradient(135deg, #3F51B5 0%, #283593 100%)',
+            'tag-qianbei': 'linear-gradient(135deg, #E67E22 0%, #D84315 100%)',
+            'tag-dienneng': 'linear-gradient(135deg, #FFD700 0%, #FFA000 100%)',
+            'tag-konglong': 'linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)'
+        };
+
+        const tagIcons = {
+            'tag-kuaidi': '📦',
+            'tag-jiuyuan': '🚑',
+            'tag-gongcheng': '🔧',
+            'tag-ziran': '🌿',
+            'tag-taikong': '🚀',
+            'tag-jingjie': '🚓',
+            'tag-jiaotong': '🚚',
+            'tag-zhihui': '🎯',
+            'tag-qianbei': '🏆',
+            'tag-dienneng': '⚡',
+            'tag-konglong': '🦕'
+        };
+
+        window.summonCharacter = function() {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            const char = characters[randomIndex];
+            
+            summonImage.src = './images/' + char.id + '.webp';
+            summonImage.alt = char.name;
+            summonName.textContent = char.name;
+            
+            summonTag.textContent = tagIcons[char.tagClass] + ' ' + char.category;
+            summonTag.style.background = tagColors[char.tagClass];
+            
+            if (char.tagClass === 'tag-dienneng') {
+                summonTag.style.color = '#333';
+            } else {
+                summonTag.style.color = '#fff';
+            }
+            
+            summonPhonics.textContent = char.phonics || '?';
+            summonPhonics.style.cursor = char.phonics ? 'pointer' : 'default';
+            
+            currentSummonId = char.id;
+            summonOverlay.classList.add('active');
+            
+            if (char.phonics) {
+                setTimeout(() => {
+                    playSummonAudio();
+                }, 800);
+            }
+        };
+
+        window.closeSummon = function() {
+            summonOverlay.classList.remove('active');
+            stopCurrentAudio();
+        };
+
+        window.playSummonAudio = function() {
+            if (!currentSummonId) return;
+            
+            const char = characters.find(c => c.id === currentSummonId);
+            if (!char || !char.phonics) return;
+            
+            stopCurrentAudio();
+            
+            currentPlayingId = currentSummonId;
+            summonPhonics.classList.add('playing');
+            
+            const audio = new Audio('./audio/' + currentSummonId + '.mp3');
+            currentAudio = audio;
+            
+            audio.onended = function() {
+                summonPhonics.classList.remove('playing');
+                updatePhonicsButtonState(currentPlayingId, false);
+                currentAudio = null;
+                currentPlayingId = null;
+            };
+            
+            audio.onerror = function() {
+                summonPhonics.classList.remove('playing');
+                updatePhonicsButtonState(currentPlayingId, false);
+                currentAudio = null;
+                currentPlayingId = null;
+            };
+            
+            audio.play().catch(function(err) {
+                summonPhonics.classList.remove('playing');
+                updatePhonicsButtonState(currentPlayingId, false);
+                currentAudio = null;
+                currentPlayingId = null;
+            });
+        };
+
+        summonOverlay.addEventListener('click', function(event) {
+            if (event.target === summonOverlay) {
+                closeSummon();
+            }
         });
 
         renderCards(characters);
